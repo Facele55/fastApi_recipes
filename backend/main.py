@@ -1,9 +1,8 @@
-
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.sql import func
 
-from .models import RecipeCreate, SessionLocal, Recipe
+from models.models import RecipeCreate, SessionLocal, Recipe
 
 
 app = FastAPI()
@@ -22,11 +21,6 @@ app.add_middleware(
 )
 
 
-@app.get("/")
-async def root():
-	return {"message": "Welcome to recipe api"}
-
-
 @app.get("/ten_recipes/")
 def get_first_ten_recipes():
 	db = SessionLocal()
@@ -41,7 +35,6 @@ def get_first_ten_recipes():
 async def create_recipe(recipe: RecipeCreate):
 	db = SessionLocal()
 	new_recipe = Recipe(name=recipe.name, ingredients=recipe.ingredients, instructions=recipe.instructions, servings=recipe.servings, category=recipe.category, prep_time=recipe.prep_time, cook_time=recipe.cook_time)
-	print(new_recipe)
 	db.add(new_recipe)
 	db.commit()
 	db.refresh(new_recipe)
@@ -99,16 +92,16 @@ def get_random_recipe():
 		raise HTTPException(status_code=404, detail="Recipe not found")
 
 
-@app.get("/search_recipe/{query}")
+@app.get("/search_recipe")
 async def search_recipe(query: str = Query(None)):
 	if query:
 		db = SessionLocal()
-		recipes = db.query(Recipe).filter(Recipe.name == query)
-		recipe = [recipe for recipe in recipes]
-		print(recipe)
-		if recipe:
-			return {"recipe": recipe}
+		recipes = db.query(Recipe).filter(Recipe.name.like(f"%{query}%")).all()
+		if recipes:
+			return {"recipes": recipes}
 		else:
 			raise HTTPException(status_code=404, detail="Recipe not found")
 	else:
-		raise HTTPException(status_code=404, detail="Search name is empty")
+		raise HTTPException(status_code=404, detail="Search query is empty")
+
+
