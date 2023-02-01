@@ -23,8 +23,17 @@ function RecipeList() {
                     <li key={recipe.id}>
                         <div className="recipe-card">
                             <div className="card-body">
-                                {/*<i style={{float: 'right'}} className="fas fa-pen"><UpdateRecipe id={recipe.id} /></i>*/}
-                                {/*<i style={{float: 'right'}} className="fas fa-trash"><DeleteRecipe id={recipe.id} /></i>*/}
+                                <button>
+                                    <i className="fas fa-info" onClick={() => console.log("info")} ></i>
+                                </button>
+
+                                <button style={{float: 'right'}} >
+                                    <i className="fas fa-pen" onClick={() => console.log("update, id=", recipe.id)} ></i>
+                                </button>
+
+                                <button  style={{float: 'right'}}>
+                                    <i className="fas fa-trash" onClick={() => console.log("delete, id=", recipe.id)}></i>
+                                </button>
                                 <h3 className="recipe-name">{recipe.name}</h3>
                                 <div className="category-name">{recipe.category}</div>
                                 <div>Ingredients: <p>{recipe.ingredients}</p></div>

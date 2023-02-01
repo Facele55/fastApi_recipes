@@ -13,14 +13,14 @@ const UpdateRecipe = ({ id }) => {
   useEffect(() => {
     const fetchRecipe = async () => {
       const response = await axios.get(`http://localhost:8000/recipe/${id}`);
-      console.log(response)
-      // setRecipe(response.data);
-      // setName(response.data.name);
-      // setCategory(response.data.category);
-      // setPrepTime(response.data.prep_time);
-      // setCookTime(response.data.cook_time);
-      // setServings(response.data.servings);
-      // setLoading(false);
+      console.log(response.data)
+      setRecipe(response.data);
+      setName(response.data.name);
+      setCategory(response.data.category);
+      setPrepTime(response.data.prep_time);
+      setCookTime(response.data.cook_time);
+      setServings(response.data.servings);
+      setLoading(false);
     };
     fetchRecipe();
   }, [id]);

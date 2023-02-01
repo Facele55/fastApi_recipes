@@ -12,16 +12,10 @@ function RandomRecipe() {
             .then(res => setRecipe(res.data.recipe))
     }, []);
 
-if (recipe) {
-    console.log('0')
-}
-else {
-    console.log('1')
-}
     return (
         <div className="container">
             <h1>Random Recipe</h1>
-            {recipe ? <div className="recipe-card">
+            <div className="recipe-card">
                 <div className="card-body">
                     <h3 className="recipe-name">{recipe.name}</h3>
                     <div className="category-name">{recipe.category}</div>
@@ -33,7 +27,7 @@ else {
                         <span>Servings for: {recipe.servings} person</span>
                     </div>
                 </div>
-            </div> : <div>uytr</div>}
+            </div>
 
         </div>
     );
