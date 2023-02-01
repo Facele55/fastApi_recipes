@@ -20,3 +20,28 @@ making it easy to find new and exciting dishes to try.
 The styling of the website is clean and modern, 
 making it a visually appealing experience for users.
 
+## Instructions
+
+1. Fork/Clone
+
+1. Run the server-side FastAPI app in one terminal window:
+
+    ```sh
+    cd backend
+    python3 -m venv env
+    source env/bin/activate
+    (env)$ pip install -r requirements.txt
+    (env)$ python3 run_recies.py
+    ```
+
+    Navigate to [http://localhost:8000](http://localhost:8000)
+
+1. Run the client-side React app in a different terminal window:
+
+    ```sh
+    cd frontend
+    npm install
+    npm start
+    ```
+
+    Navigate to [http://localhost:3000](http://localhost:3000)
