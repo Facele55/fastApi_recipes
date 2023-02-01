@@ -1,0 +1,4 @@
+/recipe_venv
+/.idea
+
+*.http

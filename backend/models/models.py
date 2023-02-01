@@ -5,7 +5,13 @@ from sqlalchemy.orm import sessionmaker
 
 
 # Connect to the MySQL database
-engine = create_engine("mysql+mysqlconnector://root:@127.0.0.1/recipe")
+db_name = 'recipe'
+db_user = 'root'
+db_host = '127.0.0.1'
+db_password = ''
+
+
+engine = create_engine(f"mysql+mysqlconnector://{db_user}:@{db_host}/{db_name}", pool_size=10, max_overflow=20)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
@@ -34,3 +40,5 @@ class RecipeCreate(BaseModel):
 	category: str
 	prep_time: int
 	cook_time: int
+
+
